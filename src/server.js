@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 viewEngine(app);
 initWebRouters(app);
 
-let port = process.env.PORT || 6969;
+let port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   console.log("Backend is running on the port: " + port);
