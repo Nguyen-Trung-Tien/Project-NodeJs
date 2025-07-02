@@ -6,12 +6,18 @@
     rgba(253, 187, 45, 1) 100%
   );
   .login-container {
-    width: 400px;
-    height: 100%;
-    margin: 0 auto;
+    width: 350px;
+    height: 450px;
     border-radius: 10px;
     background-color: white;
-
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+      rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     .login-content {
       padding: 10px;
 
@@ -23,6 +29,16 @@
       }
       .login-input {
         margin: 10px 0;
+
+        .custom-input-password {
+          position: relative;
+          i {
+            position: absolute;
+            right: 5px;
+            top: 10px;
+            cursor: pointer;
+          }
+        }
       }
       .btn-login {
         width: 100%;
