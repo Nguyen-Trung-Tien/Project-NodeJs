@@ -30,7 +30,7 @@ class UserManage extends Component {
           <table id="customers">
             <tr>
               <th>Email</th>
-              <th>Firs name</th>
+              <th>First name</th>
               <th>Last name</th>
               <th>Address</th>
               <th>Action</th>
@@ -40,7 +40,7 @@ class UserManage extends Component {
                 return (
                   <tr key={index}>
                     <td>{item.email}</td>
-                    <td>{item.firsName}</td>
+                    <td>{item.firstName}</td>
                     <td>{item.lastName}</td>
                     <td>{item.address}</td>
                     <td>

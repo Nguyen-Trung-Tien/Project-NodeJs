@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import db from "../models/index";
 import bcrypt from "bcryptjs";
 const salt = bcrypt.genSaltSync(10);
@@ -31,7 +30,7 @@ let hashUserPassword = (password) => {
       let hashPassword = await bcrypt.hashSync(password, salt);
       resolve(hashPassword);
     } catch (e) {
-      resolve(e);
+      reject(e);
     }
   });
 };
@@ -101,6 +100,7 @@ let deleteUserById = (userId) => {
     }
   });
 };
+
 module.exports = {
   createNewUser: createNewUser,
   getAllUser: getAllUser,
