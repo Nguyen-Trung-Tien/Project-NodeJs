@@ -51,3 +51,38 @@
     color: rgb(255, 0, 0) !important;
   }
 }
+
+.modal-user-container {
+  .modal-content {
+    .modal-header {
+      button {
+        background-color: transparent !important;
+        color: white;
+        border: none;
+        font-size: 27px;
+        margin: 0 700px;
+      }
+    }
+  }
+
+  .modal-user-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      width: 49%;
+      &.max-width-input {
+        width: 100%;
+      }
+      input {
+        border-radius: 5px;
+        height: 30px;
+        border: 1px solid gray;
+        outline: none;
+        padding: 0 10px;
+      }
+    }
+  }
+}
