@@ -103,25 +103,26 @@ let createNewUser = (data) => {
       if (checkEmail === true) {
         resolve({
           errCode: 1,
-          message: "Your Email is already in used!,Plz try another email! ",
+          errMessage: "Your Email is already in used!,Plz try another email! ",
+        });
+      } else {
+        let hashPasswordFromBcrypt = await hashUserPassword(data.password);
+        await db.User.create({
+          email: data.email,
+          password: hashPasswordFromBcrypt,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          address: data.address,
+          phoneNumber: data.phoneNumber,
+          gender: data.gender === "1" ? true : false,
+          roleId: data.roleId,
+          positionId: data.positionId,
         });
       }
 
-      let hashPasswordFromBcrypt = await hashUserPassword(data.password);
-      await db.User.create({
-        email: data.email,
-        password: hashPasswordFromBcrypt,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        address: data.address,
-        phoneNumber: data.phoneNumber,
-        gender: data.gender === "1" ? true : false,
-        roleId: data.roleId,
-        positionId: data.positionId,
-      });
       resolve({
         errCode: 0,
-        message: "OK",
+        errMessage: "OK",
       });
     } catch (e) {
       reject(e);
@@ -141,7 +142,7 @@ let deleteUser = (userId) => {
       if (!foundUser) {
         resolve({
           errCode: 2,
-          message: `The user isn't exits `,
+          errMessage: `The user isn't exits `,
         });
       }
       await db.User.destroy({
@@ -151,7 +152,7 @@ let deleteUser = (userId) => {
       });
       resolve({
         errCode: 0,
-        message: `The user is delete! `,
+        errMessage: `The user is delete! `,
       });
     } catch (e) {
       reject(e);
@@ -165,7 +166,7 @@ let updateUserData = (data) => {
       if (!data.id) {
         resolve({
           errCode: 2,
-          message: "Missing required parameter!",
+          errMessage: "Missing required parameter!",
         });
       }
       let user = await db.User.findOne({
@@ -180,12 +181,12 @@ let updateUserData = (data) => {
 
         resolve({
           errCode: 0,
-          message: "Update the user succeed!",
+          errMessage: "Update the user succeed!",
         });
       } else {
         resolve({
           errCode: 1,
-          message: "User's not found!",
+          errMessage: "User's not found!",
         });
       }
     } catch (e) {
