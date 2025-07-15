@@ -5,7 +5,7 @@
     "health-facility": "Cơ sở y tế",
     "select-room": "Chọn bênh viện phòng khám",
     "doctor": "Bác sĩ",
-    "select-doctor": "Chọn bác sĩ",
+    "select-doctor": "Bác sĩ giỏi",
     "fee": "Gói khám",
     "check-health": "Khám sức khỏe tổng quát",
     "support": "Hỗ trợ"
@@ -13,10 +13,10 @@
   "banner": {
     "title1": "NỀN TẢNG Y TẾ",
     "title2": "CHĂM SÓC SỨC KHỎE TOÀN DIỆN",
-    "child1": "Khám từ xa",
-    "child2": "Khám chuyên khoa",
-    "child3": "Xét nghiệm y học",
-    "child4": "Sức khỏe tinh thần",
+    "child1": "Khám chuyên khoa",
+    "child2": "Khám từ xa",
+    "child3": "Khám tổng quát",
+    "child4": "Xét nghiệm y học",
     "child5": "Sức khỏe tinh thần",
     "child6": "Khám nha khoa"
   },

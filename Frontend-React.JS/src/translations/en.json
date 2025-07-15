@@ -5,7 +5,7 @@
     "health-facility": "Facility",
     "select-room": "Select hospital clinic",
     "doctor": "Doctor",
-    "select-doctor": "Choose a doctor",
+    "select-doctor": "Good doctor",
     "fee": "Examination package",
     "check-health": "General health check",
     "support": "Support"
@@ -14,8 +14,8 @@
   "banner": {
     "title1": "MEDICAL PLATFORM",
     "title2": "COMPREHENSIVE HEALTH CARE",
-    "child1": "Remote examination",
-    "child2": "Specialized examination",
+    "child1": "Explore science in depth",
+    "child2": "Remote examination",
     "child3": "General examination",
     "child4": "Medical tests",
     "child5": "Mental health",
