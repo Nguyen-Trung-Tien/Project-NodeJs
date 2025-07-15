@@ -1,7 +1,7 @@
 .home-header-container {
   height: 60px;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 40px;
 
   .home-header-content {
     width: 100%;
@@ -9,15 +9,16 @@
     display: flex;
 
     .left-content {
-      width: 25%;
+      width: 20%;
       display: flex;
-      border: 1px solid gold;
       align-items: center;
 
       .header-logo {
-        background: url("../../assets/logo.png") center center no-repeat;
         height: 100%;
         width: 100%;
+        cursor: pointer;
+        transform: scale(0.5, 0.5);
+        margin-left: -45px;
       }
       i {
         font-size: 25px;
@@ -27,8 +28,7 @@
     }
 
     .center-content {
-      width: 50%;
-      border: 1px solid green;
+      width: 55%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -43,10 +43,35 @@
 
     .right-content {
       width: 25%;
-      border: 1px solid blue;
       display: flex;
       justify-content: center;
       align-items: center;
+
+      .support {
+        padding-right: 40px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        i {
+          font-size: 16px;
+          margin-right: 5px;
+        }
+      }
+
+      .language-vi {
+        cursor: pointer;
+        &.active {
+          color: #f7d800;
+        }
+      }
+      .language-en {
+        margin: 0 10px;
+        cursor: pointer;
+        &.active {
+          color: blue;
+        }
+      }
     }
   }
 }
@@ -61,8 +86,11 @@
   flex-direction: column;
 
   .content-up {
-    border: 1px solid red;
-    height: 50%;
+    background-image: linear-gradient(
+      rgba(126, 126, 126, 0.25),
+      rgba(255, 255, 255, 0.1)
+    );
+    height: 65%;
     padding-top: 15px;
 
     .title1 {
@@ -105,13 +133,24 @@
   }
 
   .content-down {
-    border: 1px solid blue;
-    height: 50%;
+    height: 35%;
+    background-image: linear-gradient(
+      rgba(126, 126, 126, 0.25),
+      rgba(255, 255, 255, 0.1)
+    );
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-image: linear-gradient(
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 1)
+    );
 
     .options {
       text-align: center;
       display: flex;
-      gap: 50 px;
+      gap: 50px;
       justify-content: center;
 
       .option-child {
