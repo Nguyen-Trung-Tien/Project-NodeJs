@@ -35,5 +35,19 @@
       "handbook": "Bài đăng",
       "manage-handbook": "Quản lý bài đăng"
     }
+  },
+  "manage-user": {
+    "add": "Thêm mới người dùng",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "phoneNumber": "SĐT",
+    "address": "Địa chỉ",
+    "position": "Chức danh",
+    "role": "Vai trò",
+    "image": "Ảnh đại diện",
+    "gender": "Giới tính",
+    "save": "Lưu người dùng"
   }
 }

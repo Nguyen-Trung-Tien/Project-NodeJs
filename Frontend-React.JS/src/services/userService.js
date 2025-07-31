@@ -1,3 +1,4 @@
+import reactRouter from "react-router";
 import axios from "../axios";
 
 const handleLoginApi = (userEmail, userPassword) => {
@@ -24,10 +25,14 @@ const editUserService = (data) => {
   return axios.put("/api/edit-user", data);
 };
 
+const getAllCodeUserService = (inputType) => {
+  return axios.get(`/api/allCode?type=${inputType}`);
+};
 export {
   handleLoginApi,
   getAllUsers,
   createNewUserService,
   deleteUserService,
   editUserService,
+  getAllCodeUserService,
 };
