@@ -1,4 +1,3 @@
-import reactRouter from "react-router";
 import axios from "../axios";
 
 const handleLoginApi = (userEmail, userPassword) => {
