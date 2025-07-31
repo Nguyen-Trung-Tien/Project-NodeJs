@@ -1,8 +1,8 @@
 import actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  gender: [],
-  roleL: [],
+  genders: [],
+  role: [],
   position: [],
 };
 
@@ -15,10 +15,12 @@ const adminReducer = (state = initialState, action) => {
       };
 
     case actionTypes.FETCH_GENDER_SUCCESS:
-      console.log("check redux success", action);
+      let copyState = { ...state };
+      copyState.genders = action.data;
+      console.log("check redux success", copyState);
 
       return {
-        ...state,
+        ...copyState,
       };
 
     case actionTypes.FETCH_GENDER_FAILED:

@@ -5,18 +5,20 @@ import { getAllCodeUserService } from "../../services/userService";
 //   type: actionTypes.FETCH_GENDER_START,
 // });
 
-export const fetchGenderStart = async (dispatch, getState) => {
-  try {
-    let res = await getAllCodeUserService("GENDER");
-    if (res && res.errCode === 0) {
-      fetchGenderSuccess(res.data);
-    } else {
-      fetchGenderSuccess();
+export const fetchGenderStart = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllCodeUserService("GENDER");
+      if (res && res.errCode === 0) {
+        dispatch(fetchGenderSuccess(res.data));
+      } else {
+        dispatch(fetchGenderSuccess());
+      }
+    } catch (e) {
+      dispatch(fetchGenderFailed());
+      console.log("fetchGenderFailed", e);
     }
-  } catch (e) {
-    fetchGenderFailed();
-    console.log("fetchGenderFailed", e);
-  }
+  };
 };
 
 export const fetchGenderSuccess = (genderData) => ({

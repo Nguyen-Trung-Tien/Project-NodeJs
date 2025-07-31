@@ -29,9 +29,17 @@ class UserRedux extends Component {
     // }
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.genderRedux !== this.props.genderRedux) {
+      this.setState({
+        genderArr: this.props.genderRedux,
+      });
+    }
+  }
   render() {
     let genders = this.state.genderArr;
     let language = this.props.language;
+    console.log(">>>", this.props.genderRedux);
     return (
       <div className="use-redux-container">
         <div className="title"> User Redux Manage</div>
@@ -133,7 +141,7 @@ class UserRedux extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { language: state.app.language };
+  return { language: state.app.language, genderRedux: state.admin.genders };
 };
 
 const mapDispatchToProps = (dispatch) => {
