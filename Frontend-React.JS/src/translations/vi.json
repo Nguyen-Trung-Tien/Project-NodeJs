@@ -48,6 +48,7 @@
     "role": "Vai trò",
     "image": "Ảnh đại diện",
     "gender": "Giới tính",
-    "save": "Lưu người dùng"
+    "save": "Lưu người dùng",
+    "edit": "Lưu thay đổi"
   }
 }
