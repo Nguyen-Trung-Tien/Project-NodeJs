@@ -116,6 +116,7 @@ let createNewUser = (data) => {
           gender: data.gender,
           roleId: data.roleId,
           positionId: data.positionId,
+          image: data.avatar,
         });
       }
 
@@ -180,6 +181,9 @@ let updateUserData = (data) => {
         user.roleId = data.roleId;
         user.gender = data.gender;
         user.positionId = data.positionId;
+        if (data.avatar) {
+          user.image = data.avatar;
+        }
         await user.save();
 
         resolve({
