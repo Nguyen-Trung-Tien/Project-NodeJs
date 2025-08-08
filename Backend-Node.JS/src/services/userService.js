@@ -212,7 +212,7 @@ let getAllCodeService = (typeInput) => {
         });
       } else {
         let res = {};
-        let allCode = await db.allCode.findAll({ where: { type: typeInput } });
+        let allCode = await db.AllCode.findAll({ where: { type: typeInput } });
         res.errCode = 0;
         res.data = allCode;
         resolve(res);
