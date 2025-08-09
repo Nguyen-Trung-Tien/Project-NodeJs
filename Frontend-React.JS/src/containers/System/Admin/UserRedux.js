@@ -169,8 +169,8 @@ class UserRedux extends Component {
 
   handleEditUserFromParent = (user) => {
     let imageBase64 = "";
-    if (user.image) {
-      imageBase64 = new Buffer(user.image, "base64").toString("binary");
+    if (user?.image) {
+      imageBase64 = new Buffer(user?.image, "base64").toString("binary");
     }
 
     this.setState({
@@ -322,10 +322,10 @@ class UserRedux extends Component {
                     genders.length > 0 &&
                     genders.map((item, index) => {
                       return (
-                        <option key={index} value={item.keyMap}>
+                        <option key={index} value={item?.keyMap}>
                           {language === LANGUAGE.VI
-                            ? item.valueVi
-                            : item.valueEn}
+                            ? item?.valueVi
+                            : item?.valueEn}
                         </option>
                       );
                     })}
@@ -347,7 +347,7 @@ class UserRedux extends Component {
                     positions.length > 0 &&
                     positions.map((item, index) => {
                       return (
-                        <option key={index} value={item.keyMap}>
+                        <option key={index} value={item?.keyMap}>
                           {language === LANGUAGE.VI
                             ? item.valueVi
                             : item.valueEn}
@@ -372,7 +372,7 @@ class UserRedux extends Component {
                     roles.length > 0 &&
                     roles.map((item, index) => {
                       return (
-                        <option key={index} value={item.keyMap}>
+                        <option key={index} value={item?.keyMap}>
                           {language === LANGUAGE.VI
                             ? item.valueVi
                             : item.valueEn}

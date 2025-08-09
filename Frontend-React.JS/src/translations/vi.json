@@ -50,5 +50,9 @@
     "gender": "Giới tính",
     "save": "Lưu người dùng",
     "edit": "Lưu thay đổi"
+  },
+  "homepage": {
+    "outstanding-doctor": "Bác sĩ nổi bậc tuần qua",
+    "more-info": "XEM THÊM"
   }
 }

@@ -63,10 +63,10 @@ export const fetchPositionStart = () => {
       if (res && res.errCode === 0) {
         dispatch(fetchPositionSuccess(res.data));
       } else {
-        dispatch(fetchPositionSuccess());
+        dispatch(fetchPositionFailed());
       }
     } catch (e) {
-      dispatch(fetchGenderFailed());
+      dispatch(fetchPositionFailed());
       console.log("fetchPositionFailed", e);
     }
   };
@@ -118,7 +118,7 @@ export const fetchAllUserStart = () => {
       }
     } catch (e) {
       toast.error("Fetch all user error!");
-      dispatch(fetchRoleFailed());
+      dispatch(fetchAllUserFailed());
       console.log("fetchRoleFailed", e);
     }
   };
@@ -162,7 +162,7 @@ export const deleteUserSuccess = () => ({
 });
 
 export const deleteUserFailed = () => ({
-  type: actionTypes.DELETE_USER_SUCCESS,
+  type: actionTypes.DELETE_USER_FAILED,
 });
 
 export const editAUser = (data) => {

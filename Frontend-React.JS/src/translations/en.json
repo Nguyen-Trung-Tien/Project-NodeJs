@@ -51,5 +51,9 @@
     "gender": "Gender",
     "save": "Save user",
     "edit": "Save changed"
+  },
+  "homepage": {
+    "outstanding-doctor": "Outstanding doctor of the week",
+    "more-info": "MORE INFO"
   }
 }
