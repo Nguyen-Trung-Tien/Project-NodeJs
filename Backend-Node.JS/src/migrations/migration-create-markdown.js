@@ -1,7 +1,9 @@
+// migrations/20250813110000-create-markdowns.js
 "use strict";
+
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Markdown", {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable("Markdowns", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,29 +11,23 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       contentHTML: {
-        allowNull: false,
         type: Sequelize.TEXT("long"),
       },
       contentMarkdown: {
-        allowNull: false,
-        type: Sequelize.TEXT("long"),
-      },
-      description: {
-        allowNull: false,
         type: Sequelize.TEXT("long"),
       },
       doctorId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
+      },
+      description: {
+        type: Sequelize.TEXT("long"),
       },
       specialtyId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
       },
-      clinicId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
+      clinicId: { allowNull: true, type: Sequelize.INTEGER },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -42,7 +38,8 @@ module.exports = {
       },
     });
   },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Markdown");
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("Markdowns");
   },
 };
