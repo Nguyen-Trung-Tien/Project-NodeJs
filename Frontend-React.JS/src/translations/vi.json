@@ -34,6 +34,9 @@
       "manage-specialty": "Quản lý chuyên khoa",
       "handbook": "Bài đăng",
       "manage-handbook": "Quản lý bài đăng"
+    },
+    "doctor": {
+      "manage-schedule": "Quản kế hoạch khám bệnh"
     }
   },
   "manage-user": {

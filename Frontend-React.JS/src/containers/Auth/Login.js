@@ -50,7 +50,6 @@ class Login extends Component {
           });
         }
       }
-      console.log(">>>", error.response);
     }
   };
 
