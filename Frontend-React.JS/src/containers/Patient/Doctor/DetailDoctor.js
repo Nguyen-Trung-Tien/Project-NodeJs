@@ -40,7 +40,6 @@ class DetailDoctor extends Component {
       nameEn = `${detailDoctor.positionData.valueEn},${detailDoctor.firstName},${detailDoctor.lastName}`;
     }
 
-    console.log(this.state);
     return (
       <>
         <HomeHeader isShowBanner={false} />
