@@ -58,5 +58,11 @@
   "homepage": {
     "outstanding-doctor": "Outstanding doctor of the week",
     "more-info": "MORE INFO"
+  },
+  "manage-schedule": {
+    "title": "Planned Pathologist Management",
+    "choose-doctor": "Choose Doctor",
+    "choose-date": "Choose Date",
+    "save": "Save Info"
   }
 }
