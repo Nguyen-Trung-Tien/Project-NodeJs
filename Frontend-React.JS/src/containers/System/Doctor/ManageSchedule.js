@@ -42,12 +42,6 @@ class ManageSchedule extends Component {
         rangeTime: data,
       });
     }
-    // if (prevProps.language !== this.props.language) {
-    //   let dataSelect = this.builtDataInputSelect(this.props.allDoctors);
-    //   this.setState({
-    //     listDoctors: dataSelect,
-    //   });
-    // }
   }
   handleChangeSelect = async (selectedOption) => {
     this.setState({ selectedDoctor: selectedOption });
