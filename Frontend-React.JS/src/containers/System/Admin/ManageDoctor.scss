@@ -40,6 +40,9 @@
     }
   }
 
+  .manage-doctor-editor {
+    margin-top: 15px;
+  }
   .more-info {
     display: flex;
     gap: 15px;
@@ -50,6 +53,10 @@
     }
     .content-right {
       width: 60%;
+    }
+
+    .manage-doctor-editor {
+      margin-top: 15px;
     }
   }
 }
