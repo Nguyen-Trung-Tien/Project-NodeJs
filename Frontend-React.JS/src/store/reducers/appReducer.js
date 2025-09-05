@@ -32,7 +32,6 @@ const appReducer = (state = initialState, action) => {
         },
       };
     case actionTypes.CHANGE_LANGUAGE:
-      console.log("Language redux", action);
       return {
         ...state,
         language: action.language,

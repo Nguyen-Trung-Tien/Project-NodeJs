@@ -2,7 +2,7 @@ import { raw } from "body-parser";
 import db from "../models/index";
 require("dotenv").config();
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
-import _ from "lodash";
+import _, { reject } from "lodash";
 
 let getTopDoctorHome = (limitInput) => {
   return new Promise(async (resolve, reject) => {
@@ -285,6 +285,51 @@ let getScheduleByDate = (doctorId, date) => {
     }
   });
 };
+
+let getExtraDoctorById = (idInput) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!idInput) {
+        resolve({
+          errCode: -1,
+          errMessage: "Missing required parameters  !",
+        });
+      } else {
+        let data = await db.Doctor_Info.findOne({
+          where: {
+            doctorId: idInput,
+          },
+          attributes: {
+            exclude: ["id", "doctorId"],
+          },
+          include: [
+            {
+              model: db.AllCode,
+              as: "priceTypeData",
+              attributes: ["valueEn", "valueVi"],
+            },
+            {
+              model: db.AllCode,
+              as: "provinceTypeData",
+              attributes: ["valueEn", "valueVi"],
+            },
+            {
+              model: db.AllCode,
+              as: "paymentTypeData",
+              attributes: ["valueEn", "valueVi"],
+            },
+          ],
+          raw: false,
+          nest: true,
+        });
+        if (!data) data = {};
+        resolve({ errCode: 0, data: data });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   getTopDoctorHome: getTopDoctorHome,
   getAllDoctors: getAllDoctors,
@@ -292,4 +337,5 @@ module.exports = {
   getDetailDoctorById: getDetailDoctorById,
   bulkCreateSchedule: bulkCreateSchedule,
   getScheduleByDate: getScheduleByDate,
+  getExtraDoctorById: getExtraDoctorById,
 };
