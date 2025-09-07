@@ -95,6 +95,18 @@ let getExtraDoctorById = async (req, res) => {
   }
 };
 
+let getProfileDoctorById = async (req, res) => {
+  try {
+    let info = await doctorService.getProfileDoctorById(req.query.doctorId);
+    return res.status(200).json(info);
+  } catch (e) {
+    console.log(e);
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error form server!",
+    });
+  }
+};
 module.exports = {
   getTopDoctorHome: getTopDoctorHome,
   getAllDoctors: getAllDoctors,
@@ -103,4 +115,5 @@ module.exports = {
   bulkCreateSchedule: bulkCreateSchedule,
   getScheduleByDate: getScheduleByDate,
   getExtraDoctorById: getExtraDoctorById,
+  getProfileDoctorById: getProfileDoctorById,
 };
