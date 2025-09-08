@@ -32,7 +32,7 @@ class BookingModal extends Component {
         className={"booking-modal-container"}
         size="lg"
         centered
-        // backdrop={true  }
+        // backdrop={true}
       >
         <div className="booking-modal-content">
           <div className="booking-modal-header">
@@ -43,7 +43,11 @@ class BookingModal extends Component {
           </div>
           <div className="booking-modal-body">
             <div className="doctor-info">
-              <ProfileDoctor doctorId={doctorId} />
+              <ProfileDoctor
+                doctorId={doctorId}
+                isShowDescriptionDoctor={false}
+                dataTime={dataTime}
+              />
             </div>
 
             <div className="row">

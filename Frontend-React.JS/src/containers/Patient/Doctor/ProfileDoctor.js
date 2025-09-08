@@ -5,6 +5,8 @@ import "./ProfileDoctor.scss";
 import { getProfileDoctorById } from "../../../services/userService";
 import { LANGUAGE } from "../../../utils";
 import NumericFormat from "react-number-format";
+import _ from "lodash";
+import moment from "moment";
 
 class ProfileDoctor extends Component {
   constructor(props) {
@@ -38,9 +40,37 @@ class ProfileDoctor extends Component {
     }
   }
 
+  renderTimeBooking = (dataTime) => {
+    let { language } = this.props;
+
+    let time =
+      language === LANGUAGE.VI
+        ? dataTime.timeTypeData.valueVi
+        : dataTime.timeTypeData.valueEn;
+
+    if (dataTime && !_.isEmpty(dataTime)) {
+      let date =
+        language === LANGUAGE.VI
+          ? moment.unix(+dataTime.date / 1000).format("dddd - DD/MM/YYYY")
+          : moment
+              .unix(+dataTime.date / 1000)
+              .locale("en")
+              .format("ddd - MM/DD/YYYY");
+      return (
+        <>
+          <div>
+            {time} - {date}
+          </div>
+          <div>Đặt miễn phí </div>
+        </>
+      );
+    }
+    return <></>;
+  };
+
   render() {
     let { dataProfile } = this.state;
-    let { language } = this.props;
+    let { language, isShowDescriptionDoctor, dataTime } = this.props;
 
     let { nameEn, nameVi } = "";
     if (dataProfile && dataProfile.positionData) {
@@ -62,9 +92,16 @@ class ProfileDoctor extends Component {
             <div className="up">
               {language === LANGUAGE.VI ? nameVi : nameEn}
             </div>
+
             <div className="down">
-              {dataProfile.Markdown && dataProfile.Markdown.description && (
-                <span>{dataProfile.Markdown.description}</span>
+              {isShowDescriptionDoctor === true ? (
+                <>
+                  {dataProfile.Markdown && dataProfile.Markdown.description && (
+                    <span>{dataProfile.Markdown.description}</span>
+                  )}
+                </>
+              ) : (
+                <>{this.renderTimeBooking(dataTime)}</>
               )}
             </div>
           </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./DoctorSchedule.scss";
+import localization from "moment/locale/vi";
 import { LANGUAGE } from "../../../utils";
 import { FormattedMessage } from "react-intl";
 import moment from "moment";
