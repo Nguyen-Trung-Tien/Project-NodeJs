@@ -16,16 +16,21 @@ let sendSimpleEmail = async (dataSend) => {
     from: '"XIN CHÀO BẠN" <tien83442@gmail.com>',
     to: dataSend.receiveEmail,
     subject: "Thông tin đặt lịch khám bệnh",
-    html: `<h3>Xin chào ${dataSend.patientName}!</h3>
-    <p>Bạn nhận được email này vì bạn đã đặt lịch thành công!</p>
-    <p><b>Thông tin đặt lịch khám bệnh:</b></p>
-    <div><b>⏰ Thời gian:</b> ${dataSend.time}</div>
-    <div><b>👨‍⚕️ Bác sĩ:</b> ${dataSend.doctorName}</div>
-    <p>Nếu các thông tin trên là đúng, vui lòng xác nhận tại liên kết bên dưới để hoàn tất quy trình đặt lịch khám bệnh.</p>
-    <p>Chân thành cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!</p>
-    <div>
-    <a href="${dataSend.redirectLink}" target="_blank">👉 Xác nhận đặt lịch tại đây</a>
-    </div>
+    html: `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px; border-radius: 10px; background-color: #fafafa;">
+        <h2 style="color: #2c3e50; text-align: center;">Xin chào ${dataSend.patientName}!</h2>
+        <p style="font-size: 16px; color: #333;">Bạn nhận được email này vì bạn đã <b style="color:#27ae60;">đặt lịch khám bệnh thành công</b> 🎉</p>
+        <div style="background: #fff; padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid #ddd;">
+            <p style="margin: 5px 0; font-size: 15px;"><b>⏰ Thời gian:</b> ${dataSend.time}</p>
+            <p style="margin: 5px 0; font-size: 15px;"><b>👨‍⚕️ Bác sĩ:</b> ${dataSend.doctorName}</p>
+        </div>
+        <p style="font-size: 15px; color: #555;">Nếu các thông tin trên là chính xác, vui lòng nhấn nút bên dưới để xác nhận và hoàn tất quy trình đặt lịch.</p>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="${dataSend.redirectLink}" target="_blank" style="background: #3498db; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px; display: inline-block;">
+            ✅ Xác nhận đặt lịch
+            </a>
+        </div>
+        <p style="font-size: 14px; color: #777; text-align: center;">Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi ❤️</p>
+        </div>
     `,
   });
 };
