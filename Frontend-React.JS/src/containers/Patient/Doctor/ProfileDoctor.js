@@ -43,12 +43,12 @@ class ProfileDoctor extends Component {
   renderTimeBooking = (dataTime) => {
     let { language } = this.props;
 
-    let time =
-      language === LANGUAGE.VI
-        ? dataTime.timeTypeData.valueVi
-        : dataTime.timeTypeData.valueEn;
-
     if (dataTime && !_.isEmpty(dataTime)) {
+      let time =
+        language === LANGUAGE.VI
+          ? dataTime.timeTypeData.valueVi
+          : dataTime.timeTypeData.valueEn;
+
       let date =
         language === LANGUAGE.VI
           ? moment.unix(+dataTime.date / 1000).format("dddd - DD/MM/YYYY")
