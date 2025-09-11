@@ -44,7 +44,7 @@ let getBodyHTMLEmail = (dataSend) => {
         <p style="font-size: 15px; color: #555;">Nếu các thông tin trên là chính xác, vui lòng nhấn nút bên dưới để xác nhận và hoàn tất quy trình đặt lịch.</p>
         <div style="text-align: center; margin: 30px 0;">
             <a href="${dataSend.redirectLink}" target="_blank" style="background: #3498db; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px; display: inline-block;">
-            ✅ Xác nhận đặt lịch
+            Xác nhận đặt lịch
             </a>
         </div>
         <p style="font-size: 14px; color: #777; text-align: center;">Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi ❤️</p>
@@ -62,7 +62,7 @@ let getBodyHTMLEmail = (dataSend) => {
         <p style="font-size: 15px; color: #555;">If the above information is correct, please click the button below to confirm and complete the booking process.</p>
         <div style="text-align: center; margin: 30px 0;">
             <a href="${dataSend.redirectLink}" target="_blank" style="background: #3498db; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px; display: inline-block;">
-            ✅ Confirm appointment
+            Confirm appointment
             </a>
         </div>
         <p style="font-size: 14px; color: #777; text-align: center;">Thank you for trusting and using our services. ❤️</p>
