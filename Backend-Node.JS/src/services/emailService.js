@@ -13,11 +13,22 @@ let sendSimpleEmail = async (dataSend) => {
   });
 
   let info = await transporter.sendMail({
-    from: '"XIN CHÀO BẠN" <tien83442@gmail.com>',
+    from: '"BOOKING-CARE" <tien83442@gmail.com>',
     to: dataSend.receiveEmail,
-    subject: "Thông tin đặt lịch khám bệnh",
+    subject: subjectEmail(dataSend),
     html: getBodyHTMLEmail(dataSend),
   });
+};
+
+let subjectEmail = (dataSend) => {
+  let result = "";
+  if (dataSend.language === "vi") {
+    result = "Thông tin đặt lịch khám bệnh";
+  }
+  if (dataSend.language === "en") {
+    result = "Appointment information";
+  }
+  return result;
 };
 
 let getBodyHTMLEmail = (dataSend) => {
