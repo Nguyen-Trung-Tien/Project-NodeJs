@@ -6,7 +6,8 @@ module.exports = {
         email: "admin@gmail.com",
         firstName: "Admin",
         lastName: "Tien",
-
+        password:
+          "$2a$10$/KRHY.3RXrOz6h7PlWCgU.roQuqUhbAYnfMB5k4/XY9Kq0ZJ3qIey",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

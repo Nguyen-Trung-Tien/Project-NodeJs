@@ -57,7 +57,8 @@
   },
   "homepage": {
     "outstanding-doctor": "Outstanding doctor of the week",
-    "more-info": "MORE INFO"
+    "more-info": "MORE INFO",
+    "specialty-popular": "Popular specialty"
   },
   "manage-schedule": {
     "title": "Planned Pathologist Management",
