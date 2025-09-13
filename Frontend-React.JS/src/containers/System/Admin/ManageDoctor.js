@@ -28,12 +28,18 @@ class ManageDoctor extends Component {
       listPrice: [],
       listPayment: [],
       listProvince: [],
+      listClinic: [],
+      listSpecialty: [],
       selectedPrice: "",
       selectedPayment: "",
       selectedProvince: "",
+      selectedClinic: "",
+      selectedSpecialty: "",
       nameClinic: "",
       addressClinic: "",
       note: "",
+      clinicId: "",
+      specialtyId: "",
     };
   }
 
@@ -76,6 +82,15 @@ class ManageDoctor extends Component {
           result.push(object);
         });
       }
+      if (type === "SPECIALTY") {
+        inputData.map((item, index) => {
+          let object = {};
+
+          object.label = item.name;
+          object.value = item.id;
+          result.push(object);
+        });
+      }
     }
     return result;
   };
@@ -92,27 +107,39 @@ class ManageDoctor extends Component {
     }
 
     if (prevProps.allRequiredDoctorInfo !== this.props.allRequiredDoctorInfo) {
-      let { resPayment, resPrice, resProvince } =
+      let { resPayment, resPrice, resProvince, resSpecialty } =
         this.props.allRequiredDoctorInfo;
-      let dataSelectPrice = this.builtDataInputSelect(resPrice, "PRICE");
-      let dataSelectPayment = this.builtDataInputSelect(resPayment, "PAYMENT");
-      let dataSelectProvince = this.builtDataInputSelect(
+      let dataSelectedPrice = this.builtDataInputSelect(resPrice, "PRICE");
+      let dataSelectedPayment = this.builtDataInputSelect(
+        resPayment,
+        "PAYMENT"
+      );
+      let dataSelectedProvince = this.builtDataInputSelect(
         resProvince,
         "PROVINCE"
       );
+      let dataSelectedSpecialty = this.builtDataInputSelect(
+        resSpecialty,
+        "SPECIALTY"
+      );
       this.setState({
-        listPrice: dataSelectPrice,
-        listPayment: dataSelectPayment,
-        listProvince: dataSelectProvince,
+        listPrice: dataSelectedPrice,
+        listPayment: dataSelectedPayment,
+        listProvince: dataSelectedProvince,
+        listSpecialty: dataSelectedSpecialty,
+        // listClinic: dataSelectedClinic,
       });
     }
 
     if (prevProps.language !== this.props.language) {
       let { resPayment, resPrice, resProvince } =
         this.props.allRequiredDoctorInfo;
-      let dataSelectPrice = this.builtDataInputSelect(resPrice, "PRICE");
-      let dataSelectPayment = this.builtDataInputSelect(resPayment, "PAYMENT");
-      let dataSelectProvince = this.builtDataInputSelect(
+      let dataSelectedPrice = this.builtDataInputSelect(resPrice, "PRICE");
+      let dataSelectedPayment = this.builtDataInputSelect(
+        resPayment,
+        "PAYMENT"
+      );
+      let dataSelectedProvince = this.builtDataInputSelect(
         resProvince,
         "PROVINCE"
       );
@@ -120,11 +147,12 @@ class ManageDoctor extends Component {
         this.props.allDoctors,
         "USERS"
       );
+
       this.setState({
         listDoctors: dataSelect,
-        listPrice: dataSelectPrice,
-        listPayment: dataSelectPayment,
-        listProvince: dataSelectProvince,
+        listPrice: dataSelectedPrice,
+        listPayment: dataSelectedPayment,
+        listProvince: dataSelectedProvince,
       });
     }
   }
@@ -137,15 +165,8 @@ class ManageDoctor extends Component {
   };
 
   handleSaveContentMarkdown = () => {
-    if (!this.state.selectedPrice.value) {
-    }
-    if (!this.state.selectedPayment.value) {
-    }
-    if (!this.state.selectedProvince.value) {
-    }
-    if (!this.state.note) {
-    }
     let { hasOldData } = this.state;
+
     this.props.saveDetailDoctor({
       contentHTML: this.state.contentHTML,
       contentMarkdown: this.state.contentMarkdown,
@@ -159,12 +180,18 @@ class ManageDoctor extends Component {
       nameClinic: this.state.nameClinic,
       addressClinic: this.state.addressClinic,
       note: this.state.note,
+      clinicId:
+        this.state.selectedClinic && this.state.selectedClinic.value
+          ? this.state.selectedClinic.value
+          : "",
+      specialtyId: this.state.selectedSpecialty.value,
     });
   };
 
   handleChangeSelect = async (selectedOption) => {
     this.setState({ selectedOption });
-    let { listPayment, listProvince, listPrice } = this.state;
+    let { listPayment, listProvince, listPrice, listClinic, listSpecialty } =
+      this.state;
     let res = await getDetailInfoDoctor(selectedOption.value);
     if (res && res.errCode === 0 && res.data && res.data.Markdown) {
       let markdown = res.data.Markdown;
@@ -174,9 +201,13 @@ class ManageDoctor extends Component {
         priceId = "",
         provinceId = "",
         paymentId = "",
+        specialtyId = "",
+        clinicId = "",
         selectedPayment = "",
         selectedPrice = "",
-        selectedProvince = "";
+        selectedProvince = "",
+        selectedSpecialty = "",
+        selectedClinic = "";
 
       if (res.data.Doctor_Info) {
         addressClinic = res.data.Doctor_Info.addressClinic;
@@ -186,7 +217,8 @@ class ManageDoctor extends Component {
         priceId = res.data.Doctor_Info.priceId;
         provinceId = res.data.Doctor_Info.provinceId;
         paymentId = res.data.Doctor_Info.paymentId;
-
+        specialtyId = res.data.Doctor_Info.specialtyId;
+        clinicId = res.data.Doctor_Info.clinicId;
         selectedPayment = listPayment.find((item) => {
           return item && item.value === paymentId;
         });
@@ -197,6 +229,13 @@ class ManageDoctor extends Component {
 
         selectedProvince = listProvince.find((item) => {
           return item && item.value === provinceId;
+        });
+
+        selectedSpecialty = listSpecialty.find((item) => {
+          return item && item.value === specialtyId;
+        });
+        selectedClinic = listClinic.find((item) => {
+          return item && item.value === clinicId;
         });
       }
       this.setState({
@@ -210,6 +249,8 @@ class ManageDoctor extends Component {
         selectedPayment: selectedPayment,
         selectedPrice: selectedPrice,
         selectedProvince: selectedProvince,
+        selectedSpecialty: selectedSpecialty,
+        selectedClinic: selectedClinic,
       });
     } else {
       this.setState({
@@ -241,7 +282,7 @@ class ManageDoctor extends Component {
     });
   };
   render() {
-    let { hasOldData } = this.state;
+    let { hasOldData, listSpecialty } = this.state;
     return (
       <div className="manage-doctor-container">
         <div className="manage-doctor-title">
@@ -349,14 +390,47 @@ class ManageDoctor extends Component {
             />
           </div>
         </div>
+
+        <div className="row">
+          <div className="col-4 form-group">
+            <label>
+              <FormattedMessage id="admin.manage-doctor.specialty" />
+            </label>
+            <Select
+              value={this.state.selectedSpecialty}
+              onChange={this.handleChangeSelectDoctorInfo}
+              options={this.state.listSpecialty}
+              placeholder={
+                <FormattedMessage id="admin.manage-doctor.specialty" />
+              }
+              name="selectedSpecialty"
+            />
+          </div>
+          <div className="col-4 form-group">
+            <label>
+              <FormattedMessage id="admin.manage-doctor.select-clinic" />
+            </label>
+            <Select
+              value={this.state.selectedClinic}
+              onChange={this.handleChangeSelectDoctorInfo}
+              options={this.state.listClinic}
+              placeholder={
+                <FormattedMessage id="admin.manage-doctor.specialty" />
+              }
+              name="selectedClinic"
+            />
+          </div>
+        </div>
+
         <div className="manage-doctor-editor">
           <MdEditor
-            style={{ height: "500px" }}
+            style={{ height: "300px" }}
             renderHTML={(text) => mdParser.render(text)}
             onChange={this.handleEditorChange}
             value={this.state.contentMarkdown}
           />
         </div>
+
         <button
           className={
             hasOldData === true

@@ -4,6 +4,7 @@ import "./Specialty.scss";
 import Slider from "react-slick";
 import { getAllSpecialty } from "../../../services/userService";
 import { FormattedMessage } from "react-intl";
+import { withRouter } from "react-router";
 
 class Specialty extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ class Specialty extends Component {
   }
   async componentDidMount() {
     let res = await getAllSpecialty();
-    console.log("data", res);
     if (res && res.errCode === 0) {
       this.setState({ dataSpecialty: res.data ? res.data : [] });
     }
@@ -22,6 +22,12 @@ class Specialty extends Component {
     if (this.props.language !== prevProps.language) {
     }
   }
+
+  handleViewDetailSpecialty = (item) => {
+    if (this.props.history) {
+      this.props.history.push(`/detail-specialty/${item.id}`);
+    }
+  };
 
   render() {
     let { dataSpecialty } = this.state;
@@ -45,6 +51,7 @@ class Specialty extends Component {
                     <div
                       className="section-customize specialty-child"
                       key={index}
+                      onClick={() => this.handleViewDetailSpecialty(item)}
                     >
                       <div
                         style={{
@@ -75,4 +82,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Specialty)
+);
