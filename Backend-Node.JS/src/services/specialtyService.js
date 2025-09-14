@@ -1,6 +1,4 @@
-import { reject } from "lodash";
 import db from "../models/index";
-import specialty from "../models/specialty";
 
 let createSpecialty = (data) => {
   return new Promise(async (resolve, reject) => {
