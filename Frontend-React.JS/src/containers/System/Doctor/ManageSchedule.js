@@ -81,7 +81,7 @@ class ManageSchedule extends Component {
       return;
     }
 
-    let formatedDate = new Date(currentDate).getTime();
+    let formatDate = new Date(currentDate).getTime();
 
     if (rangeTime && rangeTime.length > 0) {
       let selectedTime = rangeTime.filter((item) => item.isSelected === true);
@@ -89,7 +89,7 @@ class ManageSchedule extends Component {
         selectedTime.map((schedule, index) => {
           let object = {};
           object.doctorId = selectedDoctor.value;
-          object.date = formatedDate;
+          object.date = formatDate;
           object.timeType = schedule.keyMap;
           result.push(object);
         });
@@ -100,7 +100,7 @@ class ManageSchedule extends Component {
     let res = await saveBulkScheduleDoctor({
       arrSchedule: result,
       doctorId: selectedDoctor.value,
-      formatedDate: formatedDate,
+      formatDate: formatDate,
     });
 
     if (res && res.errCode === 0) {
