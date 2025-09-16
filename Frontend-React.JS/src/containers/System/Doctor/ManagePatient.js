@@ -3,10 +3,15 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import "./ManagePatient.scss";
 import DatePicker from "../../../components/Input/DatePicker";
-import { getAllPatientForDoctor } from "../../../services/userService";
+import LoadingOverlay from "react-loading-overlay";
+import {
+  getAllPatientForDoctor,
+  postSendRemedy,
+} from "../../../services/userService";
 import moment from "moment";
 import { LANGUAGE } from "../../../utils";
 import RemedyModal from "./RemedyModal";
+import { toast } from "react-toastify";
 
 class ManagePatient extends Component {
   constructor(props) {
@@ -16,17 +21,18 @@ class ManagePatient extends Component {
       dataPatient: [],
       isOpenRemedyModal: false,
       dataModal: {},
+      isShowLoading: false,
     };
   }
 
   async componentDidMount() {
+    this.getDataPatient();
+  }
+
+  getDataPatient = async () => {
     let { user } = this.props;
     let { currentDate } = this.state;
     let formatDate = new Date(currentDate).getTime();
-    this.getDataPatient(user, formatDate);
-  }
-
-  getDataPatient = async (user, formatDate) => {
     let res = await getAllPatientForDoctor({
       doctorId: user.id,
       date: formatDate,
@@ -48,11 +54,8 @@ class ManagePatient extends Component {
       {
         currentDate: date[0],
       },
-      () => {
-        let { user } = this.props;
-        let { currentDate } = this.state;
-        let formatDate = new Date(currentDate).getTime();
-        this.getDataPatient(user, formatDate);
+      async () => {
+        await this.getDataPatient();
       }
     );
   };
@@ -62,15 +65,13 @@ class ManagePatient extends Component {
       doctorId: item.doctorId,
       patientId: item.patientId,
       email: item.patientData.email,
+      timeType: item.timeType,
+      patientName: item.patientData.firstName,
     };
     this.setState({
       isOpenRemedyModal: true,
       dataModal: data,
     });
-  };
-
-  sendRemedy = () => {
-    alert("click me");
   };
 
   closeRemedyModal = () => {
@@ -79,6 +80,34 @@ class ManagePatient extends Component {
       dataModal: {},
     });
   };
+
+  sendRemedy = async (dataChile) => {
+    let { dataModal } = this.state;
+    this.setState({
+      isShowLoading: true,
+    });
+
+    let res = await postSendRemedy({
+      email: dataChile.email,
+      imgBase64: dataChile.imgBase64,
+      doctorId: dataModal.doctorId,
+      patientId: dataModal.patientId,
+      timeType: dataModal.timeType,
+      language: this.props.language,
+      patientName: dataModal.patientName,
+    });
+
+    if (res && res.errCode === 0) {
+      this.setState({ isShowLoading: false });
+      toast.success("Send remedy success!");
+      this.closeRemedyModal();
+      await this.getDataPatient();
+    } else {
+      this.setState({ isShowLoading: false });
+      toast.error("Something wrongs...");
+    }
+  };
+
   render() {
     let { dataPatient, isOpenRemedyModal, dataModal } = this.state;
     let { language } = this.props;
@@ -148,13 +177,18 @@ class ManagePatient extends Component {
             </div>
           </div>
         </div>
-
-        <RemedyModal
-          isOpenModal={isOpenRemedyModal}
-          dataModal={dataModal}
-          closeRemedyModal={this.closeRemedyModal}
-          sendRemedy={this.sendRemedy}
-        />
+        <LoadingOverlay
+          active={this.state.isShowLoading}
+          spinner
+          text="Loading..."
+        >
+          <RemedyModal
+            isOpenModal={isOpenRemedyModal}
+            dataModal={dataModal}
+            closeRemedyModal={this.closeRemedyModal}
+            sendRemedy={this.sendRemedy}
+          />
+        </LoadingOverlay>
       </>
     );
   }

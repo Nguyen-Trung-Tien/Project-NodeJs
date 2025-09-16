@@ -1,8 +1,10 @@
 import { raw } from "body-parser";
 import db from "../models/index";
 require("dotenv").config();
+import emailService from "../services/emailService";
+
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
-import _, { reject } from "lodash";
+import _, { reject, times } from "lodash";
 
 let getTopDoctorHome = (limitInput) => {
   return new Promise(async (resolve, reject) => {
@@ -423,6 +425,7 @@ let getProfileDoctorById = (inputId) => {
     }
   });
 };
+
 let getListPatientForDoctor = (doctorId, date) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -468,6 +471,47 @@ let getListPatientForDoctor = (doctorId, date) => {
   });
 };
 
+let sendRemedy = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !data.email ||
+        !data.doctorId ||
+        !data.patientId ||
+        !data.timeType ||
+        !data.imageBase64
+      ) {
+        resolve({
+          errCode: -1,
+          errMessage: "Missing required parameters!",
+        });
+      } else {
+        // update patient status
+
+        let appointment = await db.Bookings.findOne({
+          where: {
+            doctorId: data.doctorId,
+            patientId: data.patientId,
+            timeType: data.timeType,
+            statusId: "S2",
+          },
+          raw: false,
+        });
+
+        if (appointment) {
+          appointment.statusId = "S3";
+          await appointment.save();
+        }
+
+        // send email remedy
+        await emailService.sendAttachment(data);
+        resolve({ errCode: 0, errMessage: "OK" });
+      }
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 module.exports = {
   getTopDoctorHome: getTopDoctorHome,
   getAllDoctors: getAllDoctors,
@@ -478,4 +522,5 @@ module.exports = {
   getExtraDoctorById: getExtraDoctorById,
   getProfileDoctorById: getProfileDoctorById,
   getListPatientForDoctor: getListPatientForDoctor,
+  sendRemedy: sendRemedy,
 };

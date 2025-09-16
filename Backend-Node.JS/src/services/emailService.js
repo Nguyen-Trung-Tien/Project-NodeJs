@@ -20,6 +20,64 @@ let sendSimpleEmail = async (dataSend) => {
   });
 };
 
+let getBodyHTMLEmailRemedy = (dataSend) => {
+  let result = "";
+  if (dataSend.language === "vi") {
+    result = `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px; border-radius: 10px; background-color: #fafafa;">
+        <h2 style="color: #2c3e50; text-align: center;">Xin chào ${dataSend.patientName}!</h2>
+        <p style="font-size: 16px; color: #333;">Bạn nhận được email này vì bạn đã <b style="color:#27ae60;"> khám bệnh thành công!</b> 🎉</p>
+        <p style="font-size: 15px; color: #555;">Thông tin đơn thuốc/hóa đơn được gửi đính kèm.</p>
+        <p style="font-size: 14px; color: #777; text-align: center;">Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi ❤️</p>
+        </div>
+    `;
+  }
+  if (dataSend.language === "en") {
+    result = `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 20px; border-radius: 10px; background-color: #fafafa;">
+        <h2 style="color: #2c3e50; text-align: center;">Hello  ${dataSend.patientName}!</h2>
+        <p style="font-size: 16px; color: #333;">You received this email because you have <b style="color:#27ae60;">Appointment successful!</b> 🎉</p>
+        <p style="font-size: 14px; color: #777; text-align: center;">Thank you for trusting and using our services. ❤️</p>
+        </div>
+    `;
+  }
+  return result;
+};
+
+let sendAttachment = (dataSend) => {
+  return new Promise(async (resole, reject) => {
+    try {
+      let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+          user: process.env.EMAIL_APP,
+          pass: process.env.EMAIL_APP_PASSWORD,
+        },
+      });
+
+      let info = await transporter.sendMail({
+        from: '"BOOKING-CARE" <tien83442@gmail.com>',
+        to: dataSend.email,
+        subject: subjectEmail(dataSend),
+        html: getBodyHTMLEmailRemedy(dataSend),
+        attachments: [
+          {
+            filename: `remedy-${
+              dataSend.patientId
+            }-${new Date().getTime()}.png`,
+            content: dataSend.imgBase64.split("base64,")[1],
+            encoding: "base64",
+          },
+        ],
+      });
+
+      resole();
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 let subjectEmail = (dataSend) => {
   let result = "";
   if (dataSend.language === "vi") {
@@ -72,4 +130,4 @@ let getBodyHTMLEmail = (dataSend) => {
   return result;
 };
 
-module.exports = { sendSimpleEmail };
+module.exports = { sendSimpleEmail, sendAttachment };

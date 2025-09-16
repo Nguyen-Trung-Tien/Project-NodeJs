@@ -3,14 +3,53 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import "./RemedyModal.scss";
+import { CommonUtils } from "../../../utils";
 
 class RemedyModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: "",
+      imgBase64: "",
+    };
   }
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    if (this.props.dataModal) {
+      this.setState({
+        email: this.props.dataModal.email,
+      });
+    }
+  }
+
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.dataModal !== this.props.dataModal) {
+      this.setState({
+        email: this.props.dataModal.email,
+      });
+    }
+  }
+
+  handleOnChangeEmail = (event) => {
+    this.setState({
+      email: event.target.value,
+    });
+  };
+
+  handleOnchangeImage = async (event) => {
+    let data = event.target.files;
+    let file = data[0];
+    if (file) {
+      let base64 = await CommonUtils.getBase64(file);
+      this.setState({
+        imgBase64: base64,
+      });
+    }
+  };
+
+  handleSendRemedy = () => {
+    this.props.sendRemedy(this.state);
+  };
 
   render() {
     let { isOpenModal, closeRemedyModal, dataModal, sendRemedy } = this.props;
@@ -19,7 +58,7 @@ class RemedyModal extends Component {
       <Modal
         isOpen={isOpenModal}
         className={"booking-modal-container"}
-        size="md"
+        size="lg"
         centered
         // backdrop={true}
       >
@@ -40,18 +79,23 @@ class RemedyModal extends Component {
                 <input
                   className="form-control"
                   type="email"
-                  value={dataModal.email}
+                  value={this.state.email}
+                  onChange={(event) => this.handleOnChangeEmail(event)}
                 />
               </div>
 
               <div className="col-6 form-group">
                 <label>Chọn file đơn thuốc</label>
-                <input className="form-control-file" type="file" />
+                <input
+                  className="form-control-file"
+                  type="file"
+                  onChange={(event) => this.handleOnchangeImage(event)}
+                />
               </div>
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={sendRemedy}>
+            <Button color="primary" onClick={() => this.handleSendRemedy()}>
               Send
             </Button>
             <Button color="secondary" onClick={closeRemedyModal}>
