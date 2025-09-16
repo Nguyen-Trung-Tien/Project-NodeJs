@@ -70,6 +70,12 @@ let initWebRouters = (app) => {
     "/api/get-detail-clinic-by-id",
     clinicController.getDetailClinicById
   );
+
+  router.get(
+    "/api/get-list-patient-for-doctor",
+    doctorController.getListPatientForDoctor
+  );
+
   return app.use("/", router);
 };
 
