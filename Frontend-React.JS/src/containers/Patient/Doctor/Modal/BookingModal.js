@@ -122,12 +122,13 @@ class BookingModal extends Component {
 
   handleConfirmBooking = async () => {
     //valiDate Input
-    let date = new Date(this.state.birthday).getTime();
-    let timeString = this.buildTimeBooking(this.props.dataTime);
-    let doctorName = this.builtDoctorName(this.props.dataTime);
     this.setState({
       isShowLoading: true,
     });
+    let date = new Date(this.state.birthday).getTime();
+    let timeString = this.buildTimeBooking(this.props.dataTime);
+    let doctorName = this.builtDoctorName(this.props.dataTime);
+
     let res = await postPatientBookAppointment({
       fullName: this.state.fullName,
       phoneNumber: this.state.phoneNumber,
@@ -162,10 +163,10 @@ class BookingModal extends Component {
         doctorId: "",
         timeType: "",
       });
-    } else {
       this.setState({
         isShowLoading: false,
       });
+    } else {
       toast.error("Booking a new appointment error");
     }
   };
