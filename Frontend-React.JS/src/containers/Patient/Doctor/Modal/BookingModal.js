@@ -167,6 +167,9 @@ class BookingModal extends Component {
         isShowLoading: false,
       });
     } else {
+      this.setState({
+        isShowLoading: false,
+      });
       toast.error("Booking a new appointment error");
     }
   };
