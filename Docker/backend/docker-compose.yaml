@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  database-mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: dataproject
+      MYSQL_ROOT_PASSWORD: 123456
+
+    ports:
+      - "3307:3306"
+    expose:
+      - 3306
+  #Start docker compose mySql
+  #docker compose -p dataproject-mysql -f mysql-compose.yml up -d
+
+  backend:
+    build:
+      context: ../../Backend-Node.JS
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - DB_PORT=3306
+      - DB_HOST=database-mysql
+      # - DB_HOST=host.docker.internal
+    ports:
+      - 8081:8081
+
+    # docker-compose -p nodejs-mysql up -d

@@ -1,0 +1,38 @@
+services:
+  database-mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: dataproject
+      MYSQL_ROOT_PASSWORD: 123456
+
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+    volumes:
+      - ./sern-mysql.sql:/docker-entrypoint-initdb.d/sern-mysql.sql
+  #Start docker compose mySql
+  #docker compose -p dataproject-mysql -f mysql-compose.yml up -d
+
+  backend:
+    build:
+      context: ../Backend-Node.JS
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - DB_PORT=3306
+      - DB_HOST=database-mysql
+      - URL_REACT=http://localhost
+      # - DB_HOST=host.docker.internal
+    ports:
+      - 8081:8081
+    expose:
+      - 8081
+
+  nginx:
+    image: nginx:1.23.3
+    ports:
+      - 80:80
+
+    # docker-compose -p project-app up -d

@@ -1,4 +1,3 @@
-const { times } = require("lodash");
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
@@ -11,7 +10,9 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
     logging: false,
-    query: { raw: true },
+    query: {
+      raw: true,
+    },
     timezone: "+07:00",
   }
 );
