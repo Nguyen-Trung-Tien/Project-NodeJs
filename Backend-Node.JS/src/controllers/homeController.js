@@ -1,5 +1,5 @@
 import db from "../models/index";
-import CRUDservice from "../services/CRUDservice";
+import CRUDService from "../services/CRUDService";
 
 let getHomePage = async (req, res) => {
   try {
@@ -23,23 +23,21 @@ let getCRUD = async (req, res) => {
 };
 
 let postCRUD = async (req, res) => {
-  let message = await CRUDservice.createNewUser(req.body);
-  console.log(message);
-  return res.send("Ok create new user!");
+  let message = await CRUDService.createNewUser(req.body);
+  return res.send("Ok create new user!", message);
 };
 
 let displayGetCRUD = async (req, res) => {
   try {
-    let data = await CRUDservice.getAllUser();
+    let data = await CRUDService.getAllUser();
     return res.render("displayGetCRUD.ejs", { dataTable: data });
   } catch (error) {}
 };
 
 let getEditCRUD = async (req, res) => {
   let userId = req.query.id;
-  console.log(userId);
   if (userId) {
-    let useData = await CRUDservice.getUserInfoById(userId);
+    let useData = await CRUDService.getUserInfoById(userId);
 
     return res.render("editCRUD.ejs", {
       user: useData,
@@ -50,14 +48,14 @@ let getEditCRUD = async (req, res) => {
 };
 let putCRUD = async (req, res) => {
   let data = req.body;
-  let allUsers = await CRUDservice.updateUserData(data);
+  let allUsers = await CRUDService.updateUserData(data);
   return res.render("displayGetCRUD.ejs", { dataTable: allUsers });
 };
 
 let deleteUserById = async (req, res) => {
   let id = req.query.id;
   if (id) {
-    await CRUDservice.deleteUserById(id);
+    await CRUDService.deleteUserById(id);
     return res.send("delete user succeed!");
   } else {
     return res.send("User note found!");

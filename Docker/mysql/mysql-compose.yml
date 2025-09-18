@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: dataproject
+      MYSQL_ROOT_PASSWORD: 123456
+
+    ports:
+      - "3307:3306"
+#Start docker compose mySql
+#docker compose -p dataproject-mysql -f mysql-compose.yml up -d
