@@ -111,6 +111,7 @@ Request body:
   "reason": "Khám tổng quát"
 }
 ```
+```
 +GET /bookings?status=pending&doctorId=3&date=2025-09-25 — Lấy danh sách đặt lịch
 +PUT /bookings/:id — Cập nhật trạng thái / thông tin đặt lịch
 +DELETE /bookings/:id — Huỷ đặt lịch
@@ -119,5 +120,6 @@ Request body:
 +PUT /doctors/:id — Cập nhật bác sĩ
 +DELETE /doctors/:id — Xoá bác sĩ
 =>Gợi ý: phân tách routes thành routes/booking.js, routes/doctor.js, middleware xác thực ở middlewares/auth.js.
+```
 
 
