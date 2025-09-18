@@ -1,24 +1,24 @@
-Website Đặt Lịch Khám Bệnh 
-
+📅 Web Đặt Lịch Khám Bệnh:
 Một ứng dụng web để đặt lịch khám bệnh, quản lý lịch hẹn và quản lý bác sĩ.
 Frontend: React.js + SCSS · Backend: Node.js (v16) · DB: MySQL + Sequelize
+===
 
 🔥 Tổng quan
 Ứng dụng cho phép người dùng đăng ký/đặt lịch khám, xem/huỷ lịch, đồng thời cho phép quản trị viên/quản lý xem danh sách lịch hẹn và quản lý thông tin bác sĩ. Thiết kế hướng modular, dễ mở rộng để tích hợp thêm chức năng (thông báo email, thanh toán, v.v.).
-
+===
 ✨ Tính năng chính
   +Đặt lịch khám: chọn bác sĩ, ngày giờ, thông tin bệnh nhân.
   +Quản lý đặt lịch: tạo — sửa — huỷ — lọc theo trạng thái (đã xác nhận, chờ, đã huỷ).
   +Quản lý bác sĩ: CRUD bác sĩ (họ tên, chuyên khoa, mô tả, lịch làm việc).
   +Xác thực cơ bản (có thể mở rộng JWT / OAuth).
   +API RESTful cho frontend và quản trị.
-
+===
 🧩 Kiến trúc & Stack
   +Frontend: React.js (create-react-app / Vite tuỳ project), SCSS cho styling.
   +Backend: Node.js 16, Express.js.
   +CSDL: MySQL.
   +ORM: Sequelize (models, migrations, seeders).
-
+===
 
 📁 Cấu trúc thư mục (gợi ý)
 ```
