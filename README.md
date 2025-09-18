@@ -6,18 +6,21 @@ Frontend: React.js + SCSS · Backend: Node.js (v16) · DB: MySQL + Sequelize
 Ứng dụng cho phép người dùng đăng ký/đặt lịch khám, xem/huỷ lịch, đồng thời cho phép quản trị viên/quản lý xem danh sách lịch hẹn và quản lý thông tin bác sĩ. Thiết kế hướng modular, dễ mở rộng để tích hợp thêm chức năng (thông báo email, thanh toán, v.v.).
 
 ✨ Tính năng chính
+```
   +Đặt lịch khám: chọn bác sĩ, ngày giờ, thông tin bệnh nhân.
   +Quản lý đặt lịch: tạo — sửa — huỷ — lọc theo trạng thái (đã xác nhận, chờ, đã huỷ).
   +Quản lý bác sĩ: CRUD bác sĩ (họ tên, chuyên khoa, mô tả, lịch làm việc).
   +Xác thực cơ bản (có thể mở rộng JWT / OAuth).
   +API RESTful cho frontend và quản trị.
+```
 
 🧩 Kiến trúc & Stack
+```
   +Frontend: React.js (create-react-app / Vite tuỳ project), SCSS cho styling.
   +Backend: Node.js 16, Express.js.
   +CSDL: MySQL.
   +ORM: Sequelize (models, migrations, seeders).
-
+```
 📁 Cấu trúc thư mục (gợi ý)
 ```
 /backend
@@ -39,12 +42,14 @@ Frontend: React.js + SCSS · Backend: Node.js (v16) · DB: MySQL + Sequelize
 README.md
 ```
 ⚙️ Yêu cầu
+```
 Node.js v16.x
 MySQL server
 npm / yarn
 (Tùy chọn) Sequelize CLI nếu dùng migration/seed: npm i -g sequelize-cli
 Môi trường: .env (biến môi trường).
-Lưu trữ file (nếu cần): local / cloud (S3).  
+Lưu trữ file (nếu cần): local / cloud (S3).
+```
 
 🛠️ Cài đặt & chạy (local)
 
