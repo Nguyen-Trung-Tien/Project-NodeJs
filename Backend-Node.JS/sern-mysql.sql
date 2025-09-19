@@ -1,4 +1,4 @@
-INSERT INTO Allcodes (Allcodes.id,Allcodes.keyMap, Allcodes.type,  Allcodes.valueEN, Allcodes.valueVI, Allcodes.createdAt, Allcodes.updatedAt) VALUES
+INSERT INTO AllCodes (AllCodes.id,AllCodes.keyMap, AllCodes.type,  AllCodes.valueEN, AllCodes.valueVI, AllCodes.createdAt, AllCodes.updatedAt) VALUES
 (47, 'R1', 'ROLE', 'Admin', 'Quản trị viên', current_timestamp, current_timestamp),
 (48, 'R2', 'ROLE', 'Doctor', 'Bác sĩ', current_timestamp, current_timestamp),
 (49, 'R3', 'ROLE', 'Patient', 'Bệnh nhân', current_timestamp, current_timestamp),
@@ -70,10 +70,10 @@ INSERT INTO Clinics (Clinics.id, Clinics.address, Clinics.name, Clinics.descript
 
 
 --
--- Dumping data for table "Doctor_Infor"
+-- Dumping data for table "Doctor_Info"
 --
 
-INSERT INTO Doctor_Infor (Doctor_Infor.id, Doctor_Infor.doctorId, Doctor_Infor.specialtyId, Doctor_Infor.clinicId, Doctor_Infor.priceId, Doctor_Infor.provinceId, Doctor_Infor.paymentId, Doctor_Infor.addressClinic, Doctor_Infor.nameClinic, Doctor_Infor.note, Doctor_Infor.count, Doctor_Infor.createdAt, Doctor_Infor.updatedAt) VALUES
+INSERT INTO Doctor_Info (Doctor_Info.id, Doctor_Info.doctorId, Doctor_Info.specialtyId, Doctor_Info.clinicId, Doctor_Info.priceId, Doctor_Info.provinceId, Doctor_Info.paymentId, Doctor_Info.addressClinic, Doctor_Info.nameClinic, Doctor_Info.note, Doctor_Info.count, Doctor_Info.createdAt, Doctor_Info.updatedAt) VALUES
 (1, 46, 3, 7, 'PRI4', 'PRO1', 'PAY2', '315 Trường Chinh, Hà Nội', 'Khám đa khoa 315', 'Bác sĩ không khám bảo hiểm', 0, '2021-08-08 15:10:36', '2021-08-13 15:14:11'),
 (2, 44, 3, 7, 'PRI2', 'PRO1', 'PAY2', '315 Trường Chinh, Sao Hỏa', 'Phòng khoám đa khoa bác sĩ Erir Pham', 'bác sĩ không khám bảo hiểm', 0, '2021-08-09 18:05:25', '2021-08-13 15:17:25'),
 (3, 39, 3, NULL, 'PRI2', 'PRO2', 'PAY2', 'asdfasdfasdf', 'asdfasdf', 'asdfasdfasfd', 0, '2021-08-10 17:19:52', '2021-08-10 17:20:49'),
